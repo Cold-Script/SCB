@@ -20,9 +20,13 @@ local Tab1 = Window:MakeTab({
 Tab1:AddSlider({Name="Hitbox Range",Min=10,Value=35,Max=35,Callback=function(TV)
 if _G.EnableHitbox then
 while task.wait() do
+spawn(function()
+	pcall(function()
 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
     v.HumanoidRootPart.Size = Vector3.new(TV, TV, TV)
     v.HumanoidRootPart.Transparency = 0.85
+	   end)
+end)									
         end
     end
 end
@@ -36,24 +40,32 @@ local Tab2 = Window:MakeTab({
 	PremiumOnly = false
 })
 
-Tab1:AddSlider({Name="Speed Boost",Min=10,Value=50,Max=50,Callback=function(Speaker)
+Tab2:AddSlider({Name="Speed Boost",Min=10,Value=50,Max=50,Callback=function(Speaker)
 if _G.EnableWS then
 while task.wait() do
+    spawn(function()
+	pcall(function()
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speaker
-      end
-   end
+    end)
+end)
+end
+end
 end})
-Tab1:AddToggle({Name="Enable Toggle Speed Boost",Value=false,Callback=function(TV2)
+Tab2:AddToggle({Name="Enable Toggle Speed Boost",Value=false,Callback=function(TV2)
 _G.EnableWS = TV2
 end})
-Tab1:AddSlider({Name="Field Of View",Min=10,Value=120,Max=120,Callback=function(Cam2)
+Tab2:AddSlider({Name="Field Of View",Min=10,Value=120,Max=120,Callback=function(Cam2)
 if _G.EnableFOV then
 while task.wait() do
+spawn(function()
+	pcall(function()
 workspace.CurrentCamera.FieldOfView = Cam2
-      end
+									end)
+end)
+								end
    end
 end})
-Tab1:AddToggle({Name="Enable Toggle FOV",Value=false,Callback=function(Speaker2)
+Tab2:AddToggle({Name="Enable Toggle FOV",Value=false,Callback=function(Speaker2)
 _G.EnableFOV = Speaker2
 end})
 local Tab3 = Window:MakeTab({
